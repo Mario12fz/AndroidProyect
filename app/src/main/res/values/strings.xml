@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">App1</string>
+    <string name="edt_message">Enter Your Message</string>
+    <string name="btn_send">Send</string>
+</resources>
