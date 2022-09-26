@@ -3,15 +3,22 @@ package com.example.app1
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import android.widget.Toolbar
 
 const val EXTRA_MESSAGE = "message"
 class MainActivity : AppCompatActivity() {
+    private var toolbar: Toolbar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar = findViewById(R.id.toolbar)
+        //setSupportActionBar(toolbar)
 
         val edtMessage = findViewById<EditText>(R.id.editMessage)
         val btnSend = findViewById<Button>(R.id.btnSend)
@@ -32,5 +39,28 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =  when(item.itemId) {
+        R.id.item_search -> {
+            Toast.makeText(this, "Item search", Toast.LENGTH_SHORT).show()
+            true
+        }
+        R.id.item_share -> {
+            Toast.makeText(this, "Item search", Toast.LENGTH_SHORT).show()
+            true
+        }
+        R.id.item_exit-> {
+            Toast.makeText(this, "Item Exit", Toast.LENGTH_SHORT).show()
+            true
+
+        }else->{
+            super.onOptionsItemSelected(item)
+        }
     }
 }
