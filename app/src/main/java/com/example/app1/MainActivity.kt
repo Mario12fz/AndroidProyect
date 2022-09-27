@@ -12,13 +12,15 @@ import android.widget.Toolbar
 
 const val EXTRA_MESSAGE = "message"
 class MainActivity : AppCompatActivity() {
-    private var toolbar: Toolbar? = null
+
+    private var toolbar: androidx.appcompat.widget.Toolbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         toolbar = findViewById(R.id.toolbar)
-        //setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
 
         val edtMessage = findViewById<EditText>(R.id.editMessage)
         val btnSend = findViewById<Button>(R.id.btnSend)
@@ -51,12 +53,20 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Item search", Toast.LENGTH_SHORT).show()
             true
         }
-        R.id.item_share -> {
+        R.id.item_search -> {
             Toast.makeText(this, "Item search", Toast.LENGTH_SHORT).show()
             true
         }
+        R.id.item_share -> {
+            Toast.makeText(this, "Item share", Toast.LENGTH_SHORT).show()
+            true
+        }
+        R.id.item_setting -> {
+            Toast.makeText(this, "Item settings", Toast.LENGTH_SHORT).show()
+            true
+        }
         R.id.item_exit-> {
-            Toast.makeText(this, "Item Exit", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Item close App", Toast.LENGTH_SHORT).show()
             true
 
         }else->{
