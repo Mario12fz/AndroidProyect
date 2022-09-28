@@ -1,31 +1,34 @@
 package com.example.app1
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import android.widget.Toolbar
+import android.widget.*
+import com.example.app1.databinding.ActivityMainBinding
 
 const val EXTRA_MESSAGE = "message"
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     private var toolbar: androidx.appcompat.widget.Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
+        val btnSend = binding.btnSend
+
         val edtMessage = findViewById<EditText>(R.id.editMessage)
-        val btnSend = findViewById<Button>(R.id.btnSend)
-        btnSend.setOnClickListener {
-            val edtMessage = findViewById<EditText>(R.id.editMessage)
+        btnSend.setOnClickListener{
+            val edtMessage = binding.editMessage
             if (edtMessage.text.toString().length == 0) {
                 Toast.makeText(this, "Enter your Message", Toast.LENGTH_SHORT).show()
             } else {
@@ -37,6 +40,13 @@ class MainActivity : AppCompatActivity() {
                 // Iniciamos la otra  actividad
                 startActivity(intent)
 
+            }
+        }
+
+        binding.btnGetData.setOnClickListener {
+            val  edtMennsage = binding.editMessage
+            if(edtMessage.text.toString().length > 0){
+                binding.tvResult.text = edtMessage.text
             }
         }
 
@@ -73,4 +83,24 @@ class MainActivity : AppCompatActivity() {
             super.onOptionsItemSelected(item)
         }
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if(newConfig.orientation === Configuration.ORIENTATION_PORTRAIT){
+            binding.tvResult.setText("Portrait view")
+            Toast.makeText(this, "Postriat", Toast.LENGTH_SHORT).show()
+
+        }else {
+            Toast.makeText(this, "Landscape", Toast.LENGTH_SHORT).show()
+            binding.tvResult.setText("Landscape View")
+            }
+
+        }
+
+    }
+
+
+private fun TextView.setText() {
+    TODO("Not yet implemented")
 }
